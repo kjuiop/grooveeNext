@@ -1,16 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import App from 'next/app'
 import Head from 'next/head';
+
+import PropTypes from 'prop-types';
+import { ThemeProvider } from 'styled-components'
+
 import 'antd/dist/antd.css';
 
+import GlobalStyle from '../components/GlobalStyle';
+import theme from '../components/theme';
+
 const Groovee = ({ Component }) => {
+
     return (
         <>
-            <Head>
-                <meta charSet="utf-8" />
-                <title>스터디그룹을 구하고 싶다면?</title>
-            </Head>
-            <Component />
+            <GlobalStyle>
+                <ThemeProvider theme={theme}>
+                    <Component />
+                </ThemeProvider>
+            </GlobalStyle>
         </>
     )
 };
