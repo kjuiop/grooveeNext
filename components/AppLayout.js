@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Drawer } from 'antd';
+import { UnorderedListOutlined } from '@ant-design/icons';
+
 
 const { Header, Footer, Content } = Layout;
-
+const { SubMenu } = Menu;
 
 <style jsx>{`
 
@@ -29,7 +31,6 @@ const { Header, Footer, Content } = Layout;
 
 `}</style>
 
-
 const headerPadding = {
     paddingLeft: 30,
     paddingRight: 30
@@ -44,12 +45,22 @@ const colorWhite = {
 }
 
 const contentWrapper = {
-    padding: '0 50px',
-    backgroundColor: 'white'
+    minHeight : 747,
+    padding: '0 30px',
+    backgroundColor: '#fff'
 }
 
 const textAlignCenter = {
     textAlign : 'center'
+}
+
+const parentMenu = {
+    position: 'relative'
+}
+
+const rightChildMenu = {
+    position: 'absolute',
+    right : '3px'
 }
 
 
@@ -58,19 +69,24 @@ const AppLayout = ({ children }) => {
         <>
             <Layout className="layout">
                 <Header style={headerPadding}>
-                    <Menu theme="dark" mode="horizontal">
+                    <Menu theme="dark" mode="horizontal" style={parentMenu} >
                         <Menu.Item key="home" style={logo}>
                             <Link href="/"><a style={colorWhite}>🐝 Groovee</a></Link>
                         </Menu.Item>
+                        <SubMenu key="SubMenu" 
+                                 align="right"
+                                 icon={<UnorderedListOutlined style={colorWhite} />}
+                                 style={rightChildMenu}
+                        >
+                            <Menu.ItemGroup title="스터디 그룹" />
+                            <Menu.ItemGroup title="로그인">
+                            </Menu.ItemGroup>
+                            <Menu.ItemGroup title="회원가입" />
+                        </SubMenu>
                     </Menu>
                 </Header>
                 <Content style={contentWrapper}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>
-                    <div className="site-layout-content">{children}</div>
+                    <div>{children}</div>
                 </Content>
                 <Footer style={textAlignCenter}>Copyright &copy; Groovee 2021</Footer>
             </Layout>
