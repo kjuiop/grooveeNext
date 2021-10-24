@@ -65,6 +65,9 @@ const rightChildMenu = {
 
 
 const AppLayout = ({ children }) => {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    
     return (
         <>
             <Layout className="layout">
@@ -78,10 +81,15 @@ const AppLayout = ({ children }) => {
                                  icon={<UnorderedListOutlined style={colorWhite} />}
                                  style={rightChildMenu}
                         >
-                            <Menu.ItemGroup title="스터디 그룹" />
-                            <Menu.ItemGroup title="로그인">
-                            </Menu.ItemGroup>
-                            <Menu.ItemGroup title="회원가입" />
+                            <Menu.Item key="groups">
+                                    <Link href="/groups"><a>스터디그룹</a></Link>
+                            </Menu.Item>
+                            <Menu.Item key="login">
+                                    <Link href="/login"><a>로그인</a></Link>
+                            </Menu.Item>
+                            <Menu.Item key="signUp">
+                                    <Link href="/signUp"><a>회원가입</a></Link>
+                            </Menu.Item>
                         </SubMenu>
                     </Menu>
                 </Header>
